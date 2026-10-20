@@ -22,7 +22,7 @@
   "showHist": 1,
   "histLength": 3000,
   "storeHistory": 1,
-  "saveVideo": 1,
+  "saveVideo": 0,
   "saveVideoN": 10,
   "imageName": "video/frame_%04d.bmp",
   "finalImage": "final_state.bmp",

@@ -9,7 +9,7 @@
 #include <stdio.h>
 #endif
 
-#include "abm.h"
+#include "active-brownian.h"
 
 REGISTER_USERDATA(USERDATA)
 

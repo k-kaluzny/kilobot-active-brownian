@@ -218,3 +218,25 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# Kilobot / C build
+*.o
+*.elf
+*.hex
+*.a
+
+# data and results (never commit)
+data/
+results/
+logs/
+slurm-*.out
+*.mp4
+*.avi
+*.mov
+*.h5
+*.npy
+
+# machine-specific
+config.yaml
+.env
+.DS_Store

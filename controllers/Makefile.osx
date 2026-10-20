@@ -5,9 +5,9 @@ SOURCES=active-brownian.c
 # name of the executable file
 EXECUTABLE=active-brownian
 # Path to the official kilolib (real bots only)
-KILOHEADERS=/Users/krzysztofkaluzny/Kilobots/kilolib
+KILOHEADERS ?= $(HOME)/Kilobots/kilolib
 # path of kilombo.h
-SIMHEADERS=/usr/local/include
+SIMHEADERS ?= /usr/local/include
 # path to kilolib.a (real bots only)
 KILOLIB=$(KILOHEADERS)/build/kilolib.a
 # compilation flags for simulated version
