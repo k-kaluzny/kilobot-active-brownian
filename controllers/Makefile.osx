@@ -1,0 +1,63 @@
+# Make file for compiling a kilobot program, both for the
+# kilobot simulator and for the real kilobot.
+# list of c files in this project
+SOURCES=active-brownian.c
+# name of the executable file
+EXECUTABLE=active-brownian
+# Path to the official kilolib (real bots only)
+KILOHEADERS=/Users/krzysztofkaluzny/Kilobots/kilolib
+# path of kilombo.h
+SIMHEADERS=/usr/local/include
+# path to kilolib.a (real bots only)
+KILOLIB=$(KILOHEADERS)/build/kilolib.a
+# compilation flags for simulated version
+SIM_CFLAGS = -c -g -O2 -Wall -std=c99 -I$(SIMHEADERS) -DSIMULATOR
+# linking flags for simulated version
+SIM_LFLAGS = -L/usr/local/lib -lsim -lSDLmain -lSDL -lm -ljansson -framework Cocoa -framework CoreFoundation
+# SIM_LFLAGS = -lheadless -lm -ljansson   # headless mode
+# targets
+sim: $(EXECUTABLE)
+hex: $(EXECUTABLE).hex
+all: sim hex
+clean:
+	rm -f *.o $(EXECUTABLE) *.elf *.hex *.lss *.eep *.bin
+# --------------------------------------------------------------------
+# Real kilobot compilation (AVR)
+# --------------------------------------------------------------------
+CC = avr-gcc
+AVRAR = avr-ar
+AVROC = avr-objcopy
+AVROD = avr-objdump
+CFLAGS = -mmcu=atmega328p -Wall -gdwarf-2 -O3 \
+         -funsigned-char -funsigned-bitfields -fpack-struct -fshort-enums
+CFLAGS += -DF_CPU=8000000 -I$(KILOHEADERS) -I$(SIMHEADERS) -DKILOBOT
+LDFLAGS = -mmcu=atmega328p -Wl,-u,vfprintf -lprintf_flt -lm
+ASFLAGS = $(CFLAGS)
+FLASH = -R .eeprom -R .fuse -R .lock -R .signature
+EEPROM = -j .eeprom --set-section-flags=.eeprom="alloc,load" \
+         --change-section-lma .eeprom=0
+
+# --- MISSING RULES: compile and link AVR elf ---
+$(EXECUTABLE)_avr.o: $(SOURCES)
+	$(CC) $(CFLAGS) -c -o $@ $(SOURCES)
+
+$(EXECUTABLE).elf: $(EXECUTABLE)_avr.o $(KILOLIB)
+	$(CC) $(LDFLAGS) -o $@ $^
+
+%.lss: %.elf
+	$(AVROD) -d -S $< > $@
+%.hex: %.elf
+	$(AVROC) -O ihex $(FLASH) $< $@
+%.eep: %.elf
+	$(AVROC) -O ihex $(EEPROM) $< $@
+%.bin: %.elf
+	$(AVROC) -O binary $(FLASH) $< $@
+# --------------------------------------------------------------------
+# Simulator compilation (Kilombo)
+# --------------------------------------------------------------------
+SIM_CC=gcc
+OBJECTS=$(SOURCES:.c=.o)
+.c.o:
+	$(SIM_CC) $(SIM_CFLAGS) $< -o $@
+$(EXECUTABLE): $(OBJECTS)
+	$(SIM_CC) -o $@ $(OBJECTS) $(SIM_LFLAGS)

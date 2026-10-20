@@ -1,0 +1,75 @@
+{
+  "bot_states": [
+    {
+      "ID": 0,
+      "x_position": 800.0,
+      "y_position": 450.0,
+      "direction": 1.5708,
+      "state": {}
+    },
+    {
+      "ID": 1,
+      "x_position": 761.8,
+      "y_position": 567.6,
+      "direction": 0.9425,
+      "state": {}
+    },
+    {
+      "ID": 2,
+      "x_position": 661.8,
+      "y_position": 640.2,
+      "direction": 0.3142,
+      "state": {}
+    },
+    {
+      "ID": 3,
+      "x_position": 538.2,
+      "y_position": 640.2,
+      "direction": 5.969,
+      "state": {}
+    },
+    {
+      "ID": 4,
+      "x_position": 438.2,
+      "y_position": 567.6,
+      "direction": 5.3407,
+      "state": {}
+    },
+    {
+      "ID": 5,
+      "x_position": 400.0,
+      "y_position": 450.0,
+      "direction": 4.7124,
+      "state": {}
+    },
+    {
+      "ID": 6,
+      "x_position": 438.2,
+      "y_position": 332.4,
+      "direction": 4.0841,
+      "state": {}
+    },
+    {
+      "ID": 7,
+      "x_position": 538.2,
+      "y_position": 259.8,
+      "direction": 3.4558,
+      "state": {}
+    },
+    {
+      "ID": 8,
+      "x_position": 661.8,
+      "y_position": 259.8,
+      "direction": 2.8274,
+      "state": {}
+    },
+    {
+      "ID": 9,
+      "x_position": 761.8,
+      "y_position": 332.4,
+      "direction": 2.1991,
+      "state": {}
+    }
+  ],
+  "ticks": 0
+}
